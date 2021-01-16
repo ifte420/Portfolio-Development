@@ -6,9 +6,9 @@
     $title = "Text Setting";
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
-    require_once 'includes/db.php';
-    $text_setting_query = "SELECT * FROM text_setting"; 
-    $text_query = mysqli_query($db_connect, $text_setting_query);
+    require_once 'includes/db-oop.php';
+    // $text_setting_query = "SELECT * FROM text_setting"; 
+    // $text_query = mysqli_query($db_connect, $text_setting_query);
 ?>
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
@@ -40,13 +40,13 @@
                 <?php
                 }
                 ?>
-                    <?php foreach($text_query as $text_setting):?>
-                        <div class="form-group">
-                            <label class="form-check-label" for="exampleCheck1"><?=$text_setting['setting_name']?></label>
-                            <input type="text" class="form-control" id="exampleCheck1" value="<?=$text_setting['setting_value']?>" name="<?=$text_setting['setting_name']?>">
-                        </div>
-                    <?php endforeach; ?>
-                        <button type="submit" class="btn btn-dark">Update Now</button>
+                <?php foreach($db->select('text_setting') as $text_setting):?>
+                    <div class="form-group">
+                        <label class="form-check-label" for="exampleCheck1"><?=$text_setting['setting_name']?></label>
+                        <input type="text" class="form-control" id="exampleCheck1" value="<?=$text_setting['setting_value']?>" name="<?=$text_setting['setting_name']?>">
+                    </div>
+                <?php endforeach; ?>
+                    <button type="submit" class="btn btn-dark">Update Now</button>
                     </form>
                 </div>
             </div>

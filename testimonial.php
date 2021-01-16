@@ -6,9 +6,9 @@
     $title = "Testimonial";
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
-    require_once 'includes/db.php';
-    $testimonial_query = "SELECT * FROM testimonial"; 
-    $testimonial_db = mysqli_query($db_connect, $testimonial_query);
+    require_once 'includes/db-oop.php';
+    // $testimonial_query = "SELECT * FROM testimonial"; 
+    // $testimonial_db = mysqli_query($db_connect, $testimonial_query);
 ?>
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
@@ -52,8 +52,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            foreach($testimonial_db as $testi):
+                        <?php
+                        foreach($db->select('testimonial') as $testi):
                         ?>
                             <tr>
                                 <td><img src="image/testimonial_image/<?=$testi['testimonial_image']?>" class="img-fluid w-100" alt="not found"></td>

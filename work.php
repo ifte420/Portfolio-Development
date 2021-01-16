@@ -6,9 +6,9 @@
     $title = "My Work";
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
-    require_once 'includes/db.php';
-    $work_query = "SELECT * FROM work"; 
-    $work_db = mysqli_query($db_connect, $work_query);
+    require_once 'includes/db-oop.php';
+    // $work_query = "SELECT * FROM work"; 
+    // $work_db = mysqli_query($db_connect, $work_query);
 ?>
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
@@ -44,8 +44,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            foreach($work_db as $work):
+                        <?php
+                            foreach($db->select('work') as $work):
                         ?>
                         <tr>
                             <td><?=$work['post_by']?></td>

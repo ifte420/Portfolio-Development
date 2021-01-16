@@ -6,9 +6,9 @@
     $title = "Brand";
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
-    require_once 'includes/db.php';
-    $brand_query = "SELECT * FROM brands"; 
-    $brand_db = mysqli_query($db_connect, $brand_query);
+    require_once 'includes/db-oop.php';
+    // $brand_query = "SELECT * FROM brands"; 
+    // $brand_db = mysqli_query($db_connect, $brand_query);
 ?>
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
@@ -39,7 +39,7 @@
                         </thead>
                         <tbody class="bg-secondary">
                             <?php
-                            foreach($brand_db as $brand):
+                            foreach($db->select('brands') as $brand):
                         ?>
                             <tr>
                                 <td>

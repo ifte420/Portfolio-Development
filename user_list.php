@@ -3,9 +3,9 @@
     $title = "All Users";
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
-    require_once 'includes/db.php';
-    $select_query = "SELECT id,full_name,emai_address,gender FROM users";
-    $data_from_db = mysqli_query($db_connect,$select_query);
+    require_once 'includes/db-oop.php';
+    // $select_query = "SELECT id,full_name,emai_address,gender FROM users";
+    // $data_from_db = mysqli_query($db_connect,$select_query);
     // $after_assoc = mysqli_fetch_assoc($data_from_db);
     // print_r($after_assoc);
 ?>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="card-body">
                         <div class="alert alert-success text-center">
-                            Our Total Useres: <?= $data_from_db->num_rows; ?></div>
+                            Our Total Useres: <?=$db->select('users')->num_rows?></div>
                         <div class="text-center mb-3">
                             <a href="delete_all.php" class="btn btn-danger btn-lg">Delete All</a>
                         </div>
@@ -36,8 +36,8 @@
                             ?>
                         <div class="alert alert-danger text-center">
                             <?php
-                                    echo $_SESSION['status'];
-                                    unset($_SESSION['status']);
+                                echo $_SESSION['status'];
+                                unset($_SESSION['status']);
                                 ?>
                         </div>
                         <?php
@@ -67,26 +67,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                        $serial_no = 1;
-                        foreach($data_from_db as $user_info):
-                        ?>
-                                <tr>
-                                    <td><?=$serial_no++?></td>
-                                    <td> <?=$user_info[('id')];?> </td>
-                                    <td> <?=ucwords($user_info[('full_name')]); ?> </td>
-                                    <td> <?=$user_info[('emai_address')]; ?> </td>
-                                    <td> <?=ucfirst($user_info[('gender')]);?> </td>
-                                    <td>
-                                        <a href="edit_user.php?id=<?=$user_info['id'];?>" class="btn btn-outline-info btn-sm">Edit</a>
+                            <?php
+                            $serial_no = 1;
+                            foreach($db->select('users') as $user_info):
+                            ?>
+                            <tr>
+                                <td><?=$serial_no++?></td>
+                                <td> <?=$user_info[('id')];?> </td>
+                                <td> <?=ucwords($user_info[('full_name')]); ?> </td>
+                                <td> <?=$user_info[('emai_address')]; ?> </td>
+                                <td> <?=ucfirst($user_info[('gender')]);?> </td>
+                                <td>
+                                    <a href="edit_user.php?id=<?=$user_info['id'];?>" class="btn btn-outline-info btn-sm">Edit</a>
 
-                                        <a href="delete_user.php?id= <?=$user_info['id'];?>" class="btn btn-outline-danger btn-sm">Delete</a>
-                                    </td>
-                                </tr>
-                                <?php
+                                    <a href="delete_user.php?id= <?=$user_info['id'];?>" class="btn btn-outline-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                            <?php
                             endforeach;
-                                ?>
-                                <?php if($data_from_db->num_rows == 0){?>
+                            ?>
+                                <?php if($db->select('users')->num_rows == 0){?>
                                 <tr class="bg-danger">
                                     <td colspan="6" class="text-center text-white"> NO Data Available</td>
                                 </tr>

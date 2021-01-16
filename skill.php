@@ -116,7 +116,6 @@
                         <button type="submit" class="btn btn-dark">Add</button>
                     </form>
                 </div>
-
             </div>
         </div>
         <?php endif;?>

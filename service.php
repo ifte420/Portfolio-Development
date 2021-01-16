@@ -3,13 +3,13 @@
     if(!isset($_SESSION['log_status'])){
         header('location: login.php');
     }
-    require_once 'includes/db.php';
+    require_once 'includes/db-oop.php';
     $title = "Service,Fact,Contact";
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
     $email_address_from_login_page = $_SESSION['email_address_from_login_page'];
-    $all_services_query = "SELECT * FROM services"; 
-    $all_services_form_db = mysqli_query($db_connect, $all_services_query);
+    // $all_services_query = "SELECT * FROM services"; 
+    // $all_services_form_db = mysqli_query($db_connect, $all_services_query);
 ?>
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
@@ -64,7 +64,7 @@
                         </thead>
                         <tbody>
                             <?php
-                            foreach($all_services_form_db as $service):
+                            foreach($db->select('services') as $service):
                         ?>
                             <tr>
                                 <td>
@@ -93,7 +93,7 @@
             </div>
         </div>
 
-        <!-- service Change part -->
+        <!-- Add service part -->
         <div class="col-4">
             <div class="card mb-3">
                 <div class="card-header bg-dark text-white text-center">
@@ -145,8 +145,8 @@
     <!-- fact part -->
     <h3 class="text-center">fact Part</h3>
     <?php
-        $all_fact_query = "SELECT * FROM fact"; 
-        $all_fact_form_db = mysqli_query($db_connect, $all_fact_query);
+        // $all_fact_query = "SELECT * FROM fact"; 
+        // $all_fact_form_db = mysqli_query($db_connect, $all_fact_query);
     ?>
     <div class="row mt-3">
         <div class="col-6">
@@ -165,7 +165,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                foreach($all_fact_form_db as $fact):
+                                foreach($db->select('fact') as $fact):
                             ?>
                             <tr>
                                 <td>
@@ -180,7 +180,7 @@
                 </div>
             </div>
         </div>
-        <!-- Fact Change part -->
+        <!-- Fact add part -->
         <div class="col-6">
             <div class="card mb-3">
                 <div class="card-header bg-dark text-white text-center">
@@ -231,8 +231,8 @@
     </div>
         <!-- Contact part -->
         <?php
-        $gust_contact = "SELECT * FROM contacts"; 
-        $contact_query = mysqli_query($db_connect, $gust_contact);
+        // $gust_contact = "SELECT * FROM contacts"; 
+        // $contact_query = mysqli_query($db_connect, $gust_contact);
         ?>
         <div id="contact" class="row mt-3">
             <div class="col-12 m-auto">
@@ -243,7 +243,7 @@
                     </div>
                     <div class="card-body">
                         <table class="table table-hover table-bordered">
-                            <?php
+                        <?php
                         if(isset($_SESSION['sms_delete'])){?>
                             <div class="alert alert-danger">
                                 <?php
@@ -251,7 +251,7 @@
                             unset($_SESSION['sms_delete']);
                         ?>
                             </div>
-                            <?php
+                        <?php
                         }
                         ?>
                             <thead>
@@ -263,8 +263,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                foreach($contact_query as $contact):
+                            <?php
+                                foreach($db->select('contacts') as $contact):
                             ?>
                                 <tr>
                                     <td><?=$contact['gust_name']?></td>
