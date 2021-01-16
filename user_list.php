@@ -1,9 +1,9 @@
 <?php
     session_start();
+    $title = "All Users";
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
     require_once 'includes/db.php';
-
     $select_query = "SELECT id,full_name,emai_address,gender FROM users";
     $data_from_db = mysqli_query($db_connect,$select_query);
     // $after_assoc = mysqli_fetch_assoc($data_from_db);

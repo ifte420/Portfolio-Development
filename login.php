@@ -1,10 +1,10 @@
 <?php
     session_start();
-    // if(isset($_SESSION['log_status'])){
-    //     header('location: dashbroad.php');
-    // }
+    if(isset($_SESSION['log_status'])){
+        header('location: dashbroad.php');
+    }
+    $title = "Log In Page";
     require_once 'includes/header-starlight.php';
-    // require_once 'includes/nav.php';
 ?>
 
 

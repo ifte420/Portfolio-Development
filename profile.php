@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once 'includes/db.php';
+    $title = "Profile";
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
     $email_address_from_login_page = $_SESSION['email_address_from_login_page'];

@@ -3,6 +3,7 @@
     if(!isset($_SESSION['log_status'])){
         header('location: login.php');
     }
+    $title = "My Work";
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
     require_once 'includes/db.php';

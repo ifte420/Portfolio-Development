@@ -4,6 +4,7 @@
         header('location: login.php');
     }
     require_once 'includes/db.php';
+    $title = "Service,Fact,Contact";
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
     $email_address_from_login_page = $_SESSION['email_address_from_login_page'];

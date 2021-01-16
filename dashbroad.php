@@ -5,6 +5,7 @@
         header('location: login.php');
         die();
     }
+    $title = "Dashboard";
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
     require_once 'includes/db.php';
