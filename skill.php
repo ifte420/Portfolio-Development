@@ -5,9 +5,7 @@
     }
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
-    require_once 'includes/db.php';
-    $skill_query = "SELECT * FROM skills"; 
-    $skill_db = mysqli_query($db_connect, $skill_query);
+    require_once 'includes/db-oop.php';
 ?>
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
@@ -53,7 +51,7 @@
                         </thead>
                         <tbody>
                             <?php
-                            foreach($skill_db as $skill):
+                            foreach($db->select('skills') as $skill):
                         ?>
                             <tr>
                                 <td><?=$skill['skill_name']?></td>
