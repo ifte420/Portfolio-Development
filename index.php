@@ -2,8 +2,6 @@
     session_start();
     require_once 'includes/db.php';
     require_once 'includes/db-oop.php';
-    
-
 
     // Text setting Query Start
     // Own Name
