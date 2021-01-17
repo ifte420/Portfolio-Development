@@ -1,29 +1,9 @@
 <?php
     session_start();
     require_once 'includes/db.php';
-    // Service Query
-    $all_services_query = "SELECT * FROM services WHERE status ='active' ORDER BY id DESC"; 
-    $all_services_form_db = mysqli_query($db_connect, $all_services_query);
+    require_once 'includes/db-oop.php';
+    
 
-    // Fact query
-    $all_fact_query = "SELECT * FROM fact LIMIT 4"; 
-    $all_fact_form_db = mysqli_query($db_connect, $all_fact_query);
-
-    //brand query
-    $brand_query = "SELECT * FROM brands"; 
-    $brand_db = mysqli_query($db_connect, $brand_query);
-
-    // Skill Query 
-    $skill_query = "SELECT * FROM skills"; 
-    $skill_db = mysqli_query($db_connect, $skill_query);
-
-    // Work Query 
-    $work_query = "SELECT * FROM work"; 
-    $work_db = mysqli_query($db_connect, $work_query);
-
-    // testimonial query
-    $testimonial_query = "SELECT * FROM testimonial"; 
-    $testimonial_db = mysqli_query($db_connect, $testimonial_query);
 
     // Text setting Query Start
     // Own Name
@@ -250,7 +230,7 @@
                             </div>
                             <!-- Education Item -->
                              <?php
-                            foreach($skill_db as $skill):?>
+                            foreach($db->select('skills') as $skill):?>
                             <div class="education">
                                 <div class="year"><?=strtoupper($skill['skill_name'])?></div>
                                 <div class="line"></div>
@@ -283,7 +263,7 @@
                     </div>
 					<div class="row">
                     <?php
-                    foreach($all_services_form_db as $service){
+                    foreach($db->select3key("*","services","WHERE status ='active' ORDER BY id DESC") as $service){
                     ?>
 						<div class="col-lg-4 col-md-6">
 							<div class="icon_box_01 wow fadeInLeft" data-wow-delay="0.2s">
@@ -313,7 +293,7 @@
                     </div>
                     <div class="row">
                     <?php
-                        foreach($work_db as $work):
+                        foreach($db->select3key("*","work", "LIMIT 4") as $work):
                     ?>
                         <div class="col-lg-4 col-md-6 pitem">
                             <div class="speaker-box">
@@ -340,7 +320,7 @@
                     <div class="fact-wrap">
                         <div class="row justify-content-between">
                             <?php
-                            foreach($all_fact_form_db as $fact):
+                            foreach($db->select3key("*","fact", "LIMIT 4") as $fact):
                             ?>
                             <div class="col-xl-2 col-lg-3 col-sm-6">
                                 <div class="fact-box text-center mb-50">
@@ -374,7 +354,7 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-9 col-lg-10">
                             <div class="testimonial-active">
-                            <?php foreach($testimonial_db as $testi):?>
+                            <?php foreach($db->select("testimonial") as $testi):?>
                                 <div class="single-testimonial text-center">
                                     <div class="testi-avatar">
                                         <img src="image/testimonial_image/<?=$testi['testimonial_image']?>" alt="img" class="img-fluid">
@@ -400,7 +380,7 @@
                 <div class="container">
                     <div class="row brand-active">
                      <?php
-                    foreach($brand_db as $brand):?>
+                    foreach($db->select('brands') as $brand):?>
                         <div class="col-xl-2">
                             <div class="single-brand">
                                 <img src="image/brand_image/<?=$brand['brand_image_name']?>" alt="not found">
@@ -490,7 +470,7 @@
 
 
         <!--Start of Tawk.to Script-->
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){
         var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -500,7 +480,7 @@
         s1.setAttribute('crossorigin','*');
         s0.parentNode.insertBefore(s1,s0);
         })();
-        </script>
+        </script> -->
         <!--End of Tawk.to Script-->
 
 
