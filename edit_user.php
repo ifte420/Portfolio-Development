@@ -1,13 +1,23 @@
 <?php
+    session_start();
     require_once 'includes/db.php';
-    require_once 'includes/header.php';
-    require_once 'includes/nav.php';
+    $title = "Edit Users";
+    require_once 'includes/header-starlight.php';
+    require_once 'includes/nav-starlight.php';
     $user_id = $_GET['id'];
     $select_user =  "SELECT id,full_name, emai_address, gender FROM users WHERE id = $user_id";
     $p = mysqli_query($db_connect, $select_user);
     $assos = mysqli_fetch_assoc($p);
 ?>
-<div class="row mt-3">
+    <div class="sl-mainpanel">
+      <nav class="breadcrumb sl-breadcrumb">
+        <a class="breadcrumb-item" href="dashbroad.php">Dashbroad</a>
+        <a class="breadcrumb-item" href="user_list.php">User List</a>
+        <span class="breadcrumb-item active">Edit Page</span>
+      </nav>
+
+      <div class="sl-pagebody">
+            <div class="row mt-3">
     <div class="col-lg-6 m-auto">
         <div class="card mb-3">
             <div class="card-header bg-success text-white text-center">
@@ -56,6 +66,12 @@
         </div>
     </div>
 </div>
+
+      </div><!-- sl-pagebody -->
+    </div><!-- sl-mainpanel -->
+
+
+
 <?php
-    require_once 'includes/footer.php';
+    require_once 'includes/footer-starlight.php';
 ?>

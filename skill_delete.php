@@ -1,9 +1,8 @@
 <?php
     session_start();
-    require_once 'includes/db.php';
+    require_once 'includes/db-oop.php';
     $id = $_GET['id'];
-    $skill_delele = "DELETE FROM skills WHERE id=$id";
-    mysqli_query($db_connect, $skill_delele);
+    $db->delete("skills", "id=$id");
     $_SESSION['skill_delete'] ="One skill Deleted";
     header('location: skill.php');
 ?>

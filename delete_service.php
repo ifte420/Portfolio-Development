@@ -1,9 +1,8 @@
 <?php
     session_start();
-    require_once 'includes/db.php';
+    require_once 'includes/db-oop.php';
     $id = $_GET['id'];
-    $service_delele = "DELETE FROM services WHERE id=$id";
-    mysqli_query($db_connect, $service_delele);
+    $db->delete("services", "id=$id");
     $_SESSION['service_delete'] ="One service Deleted";
     header('location: service.php');
 ?>

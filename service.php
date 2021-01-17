@@ -271,7 +271,7 @@
                                     <td><?=$contact['gust_email']?></td>
                                     <td><?=$contact['gust_message']?></td>
                                     <td>
-                                        <a href="service_delete.php?id=<?=$contact['id']?>" class="btn btn-danger">Delete</a>
+                                        <a href="contact_delete.php?id=<?=$contact['id']?>" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                                 <?php endforeach;?>
