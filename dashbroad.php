@@ -9,13 +9,10 @@
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
     require_once 'includes/db.php';
+    require_once 'includes/db-oop.php';
     $email_address_from_session = $_SESSION['email_address_from_login_page'];
-    $name_select_query  = "SELECT full_name FROM users WHERE emai_address = '$email_address_from_session'";
+    $name_select_oop_query = $db->select_assoc("full_name","users","WHERE emai_address = 'ifte@gmail.com'");
 ?>
-
-
-
-
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
       <nav class="breadcrumb sl-breadcrumb">
@@ -30,7 +27,7 @@
             </div><!-- card-header -->
             <div class="card-body bd bd-t-0 rounded-bottom">
                 <h1>Welcome, to our dashbroad</h1>
-                <h2>Your Name: <?=mysqli_fetch_assoc(mysqli_query($db_connect, $name_select_query))['full_name']?></h2>
+                <h2>Your Name: <?=$name_select_oop_query['full_name']?></h2>
                 <h2>Your Email: <?=$_SESSION['email_address_from_login_page']?></h2>
                 <h2>Your Role: <?=$_SESSION['role_from_login_page'];?></h2>
             </div><!-- card-body -->

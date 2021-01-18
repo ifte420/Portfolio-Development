@@ -13,6 +13,11 @@ class DB {
         $from_db = mysqli_query($this->db_connect(), $select_query);
         return $from_db;
     }
+    function select_assoc($what_to_select,$table_name, $another_write){
+        $select_query = "SELECT $what_to_select FROM $table_name $another_write";
+        $from_db = mysqli_fetch_assoc(mysqli_query($this->db_connect(), $select_query));
+        return $from_db;
+    }
     function select_count($table_name){
         $select_count_query = "SELECT COUNT(*) as total FROM $table_name";
         $from_db = mysqli_fetch_assoc(mysqli_query($this->db_connect(), $select_count_query));
@@ -31,6 +36,4 @@ class DB {
 }
 
 $db = new DB;
-
-
 ?>

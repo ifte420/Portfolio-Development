@@ -5,61 +5,51 @@
 
     // Text setting Query Start
     // Own Name
-    $owner_name_select_query = "SELECT setting_value FROM text_setting WHERE setting_name = 'own_name'"; 
-    $owner_db = mysqli_query($db_connect, $owner_name_select_query);
-
+    $owner_name_db = $db->select_assoc("setting_value","text_setting","WHERE setting_name = 'own_name'");
     // Own bio
-    $owner_bio_select_query = "SELECT setting_value FROM text_setting WHERE setting_name = 'own_bio'"; 
-    $owner_bio_db = mysqli_query($db_connect, $owner_bio_select_query);
+    $owner_bio_db = $db->select_assoc("setting_value","text_setting","WHERE setting_name = 'own_bio'");
+
 
     //facebook_link
-    $facebook_query = "SELECT setting_value FROM text_setting WHERE setting_name = 'facebook_link'"; 
-    $facebook_db = mysqli_query($db_connect, $facebook_query);
-    $facebook = mysqli_fetch_assoc($facebook_db)['setting_value'];
+
+    $facebook_db = $db->select_assoc("setting_value","text_setting","WHERE setting_name = 'facebook_link'");
+    $facebook = $facebook_db['setting_value'];
 
     // twitter_link
-    $twitter_query = "SELECT setting_value FROM text_setting WHERE setting_name = 'twitter_link'"; 
-    $twitter_db = mysqli_query($db_connect, $twitter_query);
-    $twitter = mysqli_fetch_assoc($twitter_db)['setting_value'];
+    $twitter_db = $db->select_assoc("setting_value","text_setting","WHERE setting_name = 'twitter_link'");
+    $twitter = $twitter_db['setting_value'];
 
     // instagram_link
-    $instagram_query = "SELECT setting_value FROM text_setting WHERE setting_name = 'instagram_link'"; 
-    $instagram_db = mysqli_query($db_connect, $instagram_query);
-    $instagram = mysqli_fetch_assoc($instagram_db)['setting_value'];
+    $instagram_db = $db->select_assoc("setting_value","text_setting","WHERE setting_name = 'instagram_link'");
+    $instagram = $instagram_db['setting_value'];
 
     // pinterest_link
-    $pinterest_query = "SELECT setting_value FROM text_setting WHERE setting_name = 'pinterest_link'"; 
-    $pinterest_db = mysqli_query($db_connect, $pinterest_query);
-    $pinterest = mysqli_fetch_assoc($pinterest_db)['setting_value'];
+    $pinterest_db = $db->select_assoc("setting_value","text_setting","WHERE setting_name = 'pinterest_link'");
+    $pinterest = $pinterest_db['setting_value'];
 
     // about_description
-    $about_description_query = "SELECT setting_value FROM text_setting WHERE setting_name = 'about_description'"; 
-    $about_description_db = mysqli_query($db_connect, $about_description_query);
-    $about = mysqli_fetch_assoc($about_description_db)['setting_value'];
+    $about_description_db = $db->select_assoc("setting_value","text_setting","WHERE setting_name = 'about_description'");
+    $about = $about_description_db['setting_value'];
 
     // contact_description
-    $contact_description_query = "SELECT setting_value FROM text_setting WHERE setting_name = 'contact_description'"; 
-    $contact_db = mysqli_query($db_connect, $contact_description_query);
+    $contact_description_query = $db->select_assoc("setting_value","text_setting","WHERE setting_name = 'contact_description'");
+    $contact_db = $contact_description_query['setting_value'];
 
     // country_description
-    $country_name_query = "SELECT setting_value FROM text_setting WHERE setting_name = 'country_name'"; 
-    $country_db = mysqli_query($db_connect, $country_name_query);
-    $country = mysqli_fetch_assoc($country_db)['setting_value'];
+    $country_db = $db->select_assoc("setting_value","text_setting","WHERE setting_name = 'country_name'");
+    $country = $country_db['setting_value'];
 
     // Address
-    $address_query = "SELECT setting_value FROM text_setting WHERE setting_name = 'address'"; 
-    $address_db = mysqli_query($db_connect, $address_query);
-    $address = mysqli_fetch_assoc($address_db)['setting_value'];
+    $address_db = $db->select_assoc("setting_value","text_setting","WHERE setting_name = 'address'");
+    $address = $address_db['setting_value'];
 
     // Phone
-    $phone_query = "SELECT setting_value FROM text_setting WHERE setting_name = 'phone'"; 
-    $phone_db = mysqli_query($db_connect, $phone_query);
-    $phone = mysqli_fetch_assoc($phone_db)['setting_value'];
+    $phone_db = $db->select_assoc("setting_value","text_setting","WHERE setting_name = 'phone'");
+    $phone = $phone_db['setting_value'];
 
     // Email
-    $email_query = "SELECT setting_value FROM text_setting WHERE setting_name = 'email'"; 
-    $email_db = mysqli_query($db_connect, $email_query);
-    $email = mysqli_fetch_assoc($email_db)['setting_value'];
+    $email_db = $db->select_assoc("setting_value","text_setting","WHERE setting_name = 'email'");
+    $email = $email_db['setting_value'];
 
     // Text setting Query End
 ?>
@@ -184,8 +174,8 @@
                         <div class="col-xl-7 col-lg-6">
                             <div class="banner-content">
                                 <h6 class="wow fadeInUp" data-wow-delay="0.2s">HELLO!</h6>
-                                <h2 class="wow fadeInUp" data-wow-delay="0.4s">I am <?=mysqli_fetch_assoc($owner_db)['setting_value']?></h2>
-                                <p class="wow fadeInUp" data-wow-delay="0.6s"><?=mysqli_fetch_assoc($owner_bio_db)['setting_value']?></p>
+                                <h2 class="wow fadeInUp" data-wow-delay="0.4s">I am <?=$owner_name_db['setting_value']?></h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.6s"><?=$owner_bio_db['setting_value']?></p>
                                 <div class="banner-social wow fadeInUp" data-wow-delay="0.8s">
                                     <ul>
                                         <li class="<?=($facebook)?"":"d-none"?>"><a href="<?=$facebook?>" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
@@ -402,7 +392,7 @@
                                 <h2>Contact Information</h2>
                             </div>
                             <div class="contact-content">
-                                <p><?=mysqli_fetch_assoc($contact_db)['setting_value']?></p>
+                                <p><?=$contact_db?></p>
                                 <h5>OFFICE IN <span><?=$country?></span></h5>
                                 <div class="contact-list">
                                     <ul>
