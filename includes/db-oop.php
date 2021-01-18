@@ -23,6 +23,16 @@ class DB {
         $from_db = mysqli_fetch_assoc(mysqli_query($this->db_connect(), $select_count_query));
         return $from_db['total'];
     }
+    function select_count_where($table_name, $where){
+        $select_count_query = "SELECT COUNT(*) as total FROM $table_name WHERE $where";
+        $from_db = mysqli_fetch_assoc(mysqli_query($this->db_connect(), $select_count_query));
+        return $from_db['total'];
+    }
+    function update($table_name, $what_to_set ,$where_update){
+        $update_query = "UPDATE $table_name SET $what_to_set WHERE $where_update";
+        $form_db = mysqli_query($this->db_connect(), $update_query);
+        return $form_db;
+    }
     function delete($table_name, $where_delete){
         $delete_query = "DELETE FROM $table_name WHERE $where_delete";
         $form_db = mysqli_query($this->db_connect(), $delete_query);

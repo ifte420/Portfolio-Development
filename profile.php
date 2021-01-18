@@ -1,11 +1,11 @@
 <?php
     session_start();
-    require_once 'includes/db.php';
+    require_once 'includes/db-oop.php';
     $title = "Profile";
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
     $email_address_from_login_page = $_SESSION['email_address_from_login_page'];
-    $select_profile_pic_query = "SELECT profile_image FROM users WHERE emai_address='$email_address_from_login_page'";
+    $imge_name = $db->select_assoc("profile_image", "users", "WHERE emai_address='$email_address_from_login_page'");
 ?>
 
     <!-- ########## START: MAIN PANEL ########## -->
@@ -24,12 +24,12 @@
                     </div>
                     <div class="card-body">
                         <div class="text-center">
-                            <img width="100px" class="rounded-circle border border-dark" src="image/profile image/<?=mysqli_fetch_assoc(mysqli_query($db_connect, $select_profile_pic_query))['profile_image']?>" alt="Not found">
+                            <img width="100px" class="rounded-circle border border-dark" src="image/profile image/<?=$imge_name['profile_image']?>" alt="Not found">
                             <?php
-                        if(mysqli_fetch_assoc(mysqli_query($db_connect, $select_profile_pic_query))['profile_image'] != "default.png"):
+                        if($imge_name['profile_image'] != "default.png"):
                             ?>
                             <br>
-                            <a href="delete_profile_img.php?picture_name=<?=mysqli_fetch_assoc(mysqli_query($db_connect, $select_profile_pic_query))['profile_image']?>" class="btn btn-danger btn-sm">Delete Profile Pic</a>
+                            <a href="delete_profile_img.php?picture_name=<?=$imge_name['profile_image']?>" class="btn btn-danger btn-sm">Delete Profile Pic</a>
                             <?php
                             endif;
                             ?>
