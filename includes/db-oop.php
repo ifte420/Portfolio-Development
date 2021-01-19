@@ -3,6 +3,11 @@ class DB {
     function db_connect(){
         return $db_connect = mysqli_connect('localhost', 'root', '', 'php registration data');
     }
+    function insert($table_name, $insert_place, $what_insert){
+        $insert_query = "INSERT INTO $table_name ($insert_place) VALUES ($what_insert)";
+        $from_db = mysqli_query($this->db_connect(), $insert_query);
+        return $from_db;
+    }
     function select($table_name){
         $select_query = "SELECT * FROM $table_name";
         $from_db = mysqli_query($this->db_connect(), $select_query);

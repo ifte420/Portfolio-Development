@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once 'includes/db.php';
+    require_once 'includes/db-oop.php';
 
     $user_name = $_POST['full_name'];
     $emai_address = $_POST['email_name'];
@@ -9,13 +10,11 @@
     $gender = $_POST['gender'];
 
     if($pass == $cnfm_pass){
-        $count_query = "SELECT COUNT(*) AS total FROM users WHERE emai_address='$emai_address'";
-        $from_db = mysqli_query($db_connect, $count_query);
-        $after_assoc = mysqli_fetch_assoc($from_db);
-        if($after_assoc['total'] == 0){
+        if($db->select_count_where("users", "emai_address='$emai_address'") == 0){
             $encrypt_password =  md5($pass);
-            $insert_query = "INSERT INTO users (full_name,emai_address, password,gender) VALUES ('$user_name', '$emai_address', '$encrypt_password', '$gender')";
-            mysqli_query($db_connect, $insert_query);
+            // $insert_query = "INSERT INTO users (full_name,emai_address, password,gender) VALUES ('$user_name', '$emai_address', '$encrypt_password', '$gender')";
+            // mysqli_query($db_connect, $insert_query);
+            $db->insert("users", "full_name,emai_address, password,gender", "'$user_name', '$emai_address', '$encrypt_password', '$gender'");
             $_SESSION['registration_log_in'] = "Please Log in";
             header("location: login.php");
         }
