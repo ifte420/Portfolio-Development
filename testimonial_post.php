@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once 'includes/db.php';
+    require_once 'includes/db-oop.php';
     $testi_img = $_FILES['testi_img'];
     $testi_say = $_POST['testi_say'];
     $testi_name = $_POST['testi_name'];
@@ -25,9 +25,7 @@
     $new_location = "image/testimonial_image/" . $image_new_name;
     move_uploaded_file($tmp_location, $new_location);
     // Image upload end
-    
-    echo $insert_testimonial = "INSERT INTO testimonial (testimonial_image, testimonial_say, testimonial_name, testimonial_title) VALUES ('$image_new_name','$testi_say', '$testi_name', '$testi_title')";
-    mysqli_query($db_connect, $insert_testimonial);
+    $db->insert("testimonial", "testimonial_image, testimonial_say, testimonial_name, testimonial_title", "'$image_new_name','$testi_say', '$testi_name', '$testi_title'");
     $_SESSION['testi_success'] = "Testimonial successfully added";
     header('location: testimonial.php');
     }
