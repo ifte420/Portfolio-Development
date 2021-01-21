@@ -1,14 +1,13 @@
 <?php
     session_start();
-    require_once 'includes/db.php';
+    require_once 'includes/db-oop.php';
 
     $service_icon = $_POST['service_icon'];
     $service_title = $_POST['service_title'];
     $service_description = $_POST['service_description'];
 
     if($service_icon && $service_title && $service_description){
-        $insert_service_query = "INSERT INTO services (service_icon,service_title, service_description) VALUES ('$service_icon', '$service_title', '$service_description')";
-        mysqli_query($db_connect, $insert_service_query);
+        $db->insert("services","service_icon,service_title, service_description","'$service_icon', '$service_title', '$service_description'");
         $_SESSION['service_succ'] = "Service added Successfully!";
         header("location: service.php");
     }
@@ -23,8 +22,7 @@
     $fact_description = $_POST['fact_description'];
 
     if($fact_icon && $fact_title && $fact_description){
-        $insert_fact_query = "INSERT INTO fact (fact_icon,fact_title,fact_description) VALUES ('$fact_icon', '$fact_title', '$fact_description')";
-        mysqli_query($db_connect, $insert_fact_query);
+        $db->insert("fact", "fact_icon,fact_title,fact_description", "'$fact_icon', '$fact_title', '$fact_description'");
         $_SESSION['fact_succ'] = "Fact added Successfully!";
     header("location: service.php");
     }
