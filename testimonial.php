@@ -60,7 +60,7 @@
                                 <td><?=$testi['testimonial_say']?></td>
                                 <td><?=$testi['testimonial_name']?></td>
                                 <td><?=$testi['testimonial_title']?></td>
-                                <td><a href="testimonial_delete.php?id=<?=$testi['id']?>" class="btn btn-outline-danger">Delete</a></td>
+                                <td><a href="testimonial_delete.php?id=<?=$testi['id']?>&testi_img=<?=$testi['testimonial_image']?>" class="btn btn-outline-danger">Delete</a></td>
                             </tr>
                             <?php endforeach;?>
                         </tbody>
