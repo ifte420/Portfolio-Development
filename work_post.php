@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once 'includes/db.php';
+    require_once 'includes/db-oop.php';
     $new_name_for_photo = time() . "-" . rand(100,9000);
 
     $work_title = $_POST['work_title'];
@@ -58,8 +58,7 @@
     $new_location = "image/work_image/feature/" . $feature_new_name;
     move_uploaded_file($tmp_location, $new_location);
 
-    $insert_query = "INSERT INTO work (post_by, work_title, work_category, work_details, work_thumbnail_photo, work_feature_photo) VALUES ('$post_by', '$work_title','$work_category' ,'$work_details', '$thumbnail_new_name', '$feature_new_name')";
-    mysqli_query($db_connect, $insert_query);
+    $db->insert("work", "post_by, work_title, work_category, work_details, work_thumbnail_photo, work_feature_photo", "'$post_by', '$work_title','$work_category' ,'$work_details', '$thumbnail_new_name', '$feature_new_name'");
     $_SESSION['work_img'] = "Work successfully added";
     header('location: work.php');
 ?>

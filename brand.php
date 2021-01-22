@@ -7,8 +7,6 @@
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
     require_once 'includes/db-oop.php';
-    // $brand_query = "SELECT * FROM brands"; 
-    // $brand_db = mysqli_query($db_connect, $brand_query);
 ?>
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
@@ -35,15 +33,19 @@
                         <thead>
                             <tr>
                                 <th scope="col">Brand Image</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-secondary">
-                            <?php
+                        <tbody>
+                        <?php
                             foreach($db->select('brands') as $brand):
                         ?>
                             <tr>
-                                <td>
+                                <td class="bg-secondary">
                                 <img src="image/brand_image/<?=$brand['brand_image_name']?>" alt="Not Found">
+                                </td>
+                                <td>
+                                <a class="btn btn-outline-danger" href="brand_delete.php?id=<?=$brand['id']?>&image_name=<?=$brand['brand_image_name']?>">Delete</a>
                                 </td>
                             </tr>
                             <?php endforeach;?>

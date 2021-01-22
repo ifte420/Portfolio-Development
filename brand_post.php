@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once 'includes/db.php';
+    require_once 'includes/db-oop.php';
     $new_name_for_photo = time() . "-" . rand(100,900);
 
     $image_name = $_FILES['brand_image']['name'];
@@ -25,8 +26,9 @@
     $new_location = "image/brand_image/" . $image_new_name;
     move_uploaded_file($tmp_location, $new_location);
     // Image upload end
-    $insert_brand_image = "INSERT INTO brands (brand_image_name) VALUES ('$image_new_name')";
-    mysqli_query($db_connect, $insert_brand_image);
+    // $insert_brand_image = "INSERT INTO brands (brand_image_name) VALUES ('$image_new_name')";
+    // mysqli_query($db_connect, $insert_brand_image);
+    $db->insert("brands", "brand_image_name", "'$image_new_name'");
     $_SESSION['brand_image'] = "Brand image successfully added";
     header('location: brand.php');
 ?>

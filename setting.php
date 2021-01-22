@@ -7,8 +7,6 @@
     require_once 'includes/header-starlight.php';
     require_once 'includes/nav-starlight.php';
     require_once 'includes/db-oop.php';
-    // $text_setting_query = "SELECT * FROM text_setting"; 
-    // $text_query = mysqli_query($db_connect, $text_setting_query);
 ?>
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
