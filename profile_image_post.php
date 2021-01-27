@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once 'includes/db.php';
+    require_once 'includes/db-oop.php';
     $image_name = $_FILES['new_profile_image']['name'];
     if(!$_FILES['new_profile_image']['name']){
         $_SESSION['pic_err'] = "Please Select a Picture";
@@ -16,17 +16,17 @@
         die();
     }
     // (1000 >= 1000);
-    if($_FILES['new_profile_image']['size'] < 1000){
-        $_SESSION['pic_size'] = " Your file size Absolutely 1MB less than.";
+    if($_FILES['new_profile_image']['size'] > 500000){
+        $_SESSION['pic_size'] = " Your file size Absolutely 500KB less than.";
         header('location: profile.php');
         die();
     }
     // Id number ber korlam
     $email_address_from_login_page = $_SESSION['email_address_from_login_page'];
-    $get_id_query = "SELECT id, profile_image FROM users WHERE emai_address='$email_address_from_login_page'";
-    $user_id = mysqli_fetch_assoc(mysqli_query($db_connect, $get_id_query))['id'];
-    $db_profile_image_name = mysqli_fetch_assoc(mysqli_query($db_connect, $get_id_query))['profile_image'];
-    
+    $get_id_query = $db->select_assoc("id, profile_image", "users", "WHERE emai_address='$email_address_from_login_page'");
+    $user_id = $get_id_query['id'];
+    $db_profile_image_name = $get_id_query['profile_image'];
+
     if($db_profile_image_name != "default.png"){
         unlink("image/profile image/" . $db_profile_image_name);
     }
@@ -38,8 +38,7 @@
     // Image upload end
 
     //database update start
-    $img_update_query= "UPDATE users SET profile_image='$image_new_name' WHERE emai_address='$email_address_from_login_page'";
-    mysqli_query($db_connect, $img_update_query);
+    $db->update("users", "profile_image='$image_new_name'", "emai_address='$email_address_from_login_page'");
     $_SESSION['service_delete'] = "Rrand Image added successfully";
     header('location: profile.php');
     //database update end
